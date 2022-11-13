@@ -1,6 +1,10 @@
 # block-chain-project
 
 Respected seniors,
+This web app was made with the help of firebase,vanilla js ,css,html.
+
+Using this app you can post,change profile pictures,username,chat with anyone anonymously and publicly.
+every one with the link can chat ,post on the platform.
 please follow the following steps to operate the web app:
 
 please download the zip file and extract it.
