@@ -3,6 +3,10 @@
 Respected seniors,
 please follow the following steps to operate the web app:
 
+please download the zip file and extract it.
+
+open the folder and follow the steps.
+
 STEP 1:open the index.html file with browser of your choice.
 
 STEP 2:enter name in prompt.PRESS ENTER.
@@ -27,7 +31,7 @@ step 7:enter your name.
 
 you can chat with people all over the world anonymously.
 
-step 8:enter text and click on enter.
+step 8:enter text and click on "SEND".
 
 
 you are ready to use the app.
