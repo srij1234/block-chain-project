@@ -17,7 +17,7 @@ STEP 4:PASTE THE LINK,PRESS ENTER.
 
 STEP 4:click on post option.
 
-STEP 5:find a nice image on the internet and "copy image address".
+STEP 5:find a nice image on the internet and "copy image address" or "copy image link".
 
 STEP 6:PASTE THE LINK,PRESS ENTER.
 
