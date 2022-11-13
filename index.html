@@ -1,0 +1,268 @@
+<html lang="en">
+
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <title>blockchain project</title>
+</head>
+<script>
+    const splash = document.querySelector('.splash');
+    document.addEventListener('DDMContentLoaded', (e) => {
+        setTimeout(() => {
+            splash.classList.add('display-none');
+        }, 2000);
+    });
+</script>
+<!-- <div class="splash">
+
+        <h1 class="fade-in"> welcome to my project</h1>
+    </div> -->
+
+<body>
+
+    <!-- <div class="splash">
+
+        <h1 class="fade-in"> welcome to my project</h1>
+    </div> -->
+
+    <header>
+        <nav class="navbar">
+            <div class="container">
+
+                <button class="butbut1" id="pstl">POST</button>
+
+
+                <h1 style="font-size:50;color :aliceblue">THELINK
+                </h1>
+
+                <div class="nav-links">
+                    <div class="nav-group">
+                        <button onclick="document.location='chat1.html'" class="butbut1" id="chatl">CHAT</button>
+
+                        <!--                         
+                        <li class="nav-item">
+                            <a href="#">
+                                <i class="fas fa-home"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="">
+                                <i class="fab fa-facebook-messenger"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="">
+                                <i class="far fa-compass"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="">
+                                <i class="far fa-heart"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <div class="action">
+                                <div class="profile" onclick="menuToggle()">
+                                </div>
+                            </div>
+                        </li> -->
+                        </ul>
+                    </div>
+                </div>
+        </nav>
+    </header>
+
+    <!-- Code for Showing the Status -->
+    <main>
+        <div class="container">
+            <div class="col-9" id="plswork">
+
+
+
+
+            </div>
+            <script>
+                // <![CDATA[  <-- For SVG support
+                if ('WebSocket' in window) {
+                    (function () {
+                        function refreshCSS() {
+                            var sheets = [].slice.call(document.getElementsByTagName("link"));
+                            var head = document.getElementsByTagName("head")[0];
+                            for (var i = 0; i < sheets.length; ++i) {
+                                var elem = sheets[i];
+                                var parent = elem.parentElement || head;
+                                parent.removeChild(elem);
+                                var rel = elem.rel;
+                                if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+                                    var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                                    elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+                                }
+                                parent.appendChild(elem);
+                            }
+                        }
+                        var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+                        var address = protocol + window.location.host + window.location.pathname + '/ws';
+                        var socket = new WebSocket(address);
+                        socket.onmessage = function (msg) {
+                            if (msg.data == 'reload') window.location.reload();
+                            else if (msg.data == 'refreshcss') refreshCSS();
+                        };
+                        if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+                            console.log('Live reload enabled.');
+                            sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+                        }
+                    })();
+                }
+
+                // ]]>
+            </script>
+
+
+            <script type="module">
+
+
+                // Import the functions you need from the SDKs you need
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
+                import {
+                    getDatabase,
+                    set,
+                    ref,
+                    push,
+                    child,
+                    onValue,
+                    onChildAdded
+                } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js";
+
+
+                // TODO: Add SDKs for Firebase products that you want to use
+                // https://firebase.google.com/docs/web/setup#available-libraries
+
+                // Your web app's Firebase configuration
+                const firebaseConfig = {
+                    apiKey: "AIzaSyBvNa-LFl5AZ9FDDCVYqhRpG9V1N-TCP9Y",
+                    authDomain: "plswork-48fd3.firebaseapp.com",
+                    databaseURL: "https://plswork-48fd3-default-rtdb.firebaseio.com",
+                    projectId: "plswork-48fd3",
+                    storageBucket: "plswork-48fd3.appspot.com",
+                    messagingSenderId: "97236397987",
+                    appId: "1:97236397987:web:6dbadcedc00c53684c3416"
+                };
+
+                // Initialize Firebase
+                const app = initializeApp(firebaseConfig);
+                const database = getDatabase(app);
+                var myName = prompt("Enter your name");
+
+                var profpic = prompt("Enter link for profile pic");
+                pstl.addEventListener('click', (e) => {
+                    // var message = document.getElementById('message').value;
+                    // var name = myName;
+                    var pst1 = prompt("Enter picture link");
+                    const id = push(child(ref(database), 'profpics')).key;
+
+                    set(ref(database, 'profpics/' + id), {
+                        name: myName,
+                        profpic: profpic,
+                        pst: pst1
+                    });
+                    ///  document.getElementById('profpics').value = "";
+
+
+                });
+
+            
+                const newpst = ref(database, 'profpics/');
+
+
+
+                onChildAdded(newpst, (data) => {
+                    
+                        
+                        var div1 = document.createElement("div");
+                        div1.className = "card";
+
+                        var div2 = document.createElement("div");
+                        div2.className = "top";
+                        div1.appendChild(div2);
+                        var div3 = document.createElement("div");
+                        div3.className = "userDetails";
+                        div2.appendChild(div3);
+                        var div4 = document.createElement("div");
+                        div4.className = "profilepic";
+                        div3.appendChild(div4);
+                        var div5 = document.createElement("div");
+                        div5.className = "profile_img";
+                        div4.appendChild(div5);
+                        var div6 = document.createElement("div");
+                        div6.className = "image";
+                        div5.appendChild(div6);
+                        var imgg = document.createElement("img");
+                        imgg.src = data.val().profpic;
+                        imgg.alt = "img9";
+                        imgg.height = "100";
+                        imgg.width = "100";
+
+                        div6.appendChild(imgg);
+                        var h31 = document.createElement("h3");
+                        h31.innerHTML += data.val().name;
+                        div3.appendChild(h31);
+                        var div7 = document.createElement("div");///dot
+
+                        var sp1 = document.createElement("span");///dot
+                        sp1.className = "dot";
+                        var i1 = document.createElement("i");///dot
+                        i1.className = "fas fa-ellipsis-h";
+
+                        div7.appendChild(sp1);
+                        sp1.appendChild(i1);
+                        div2.appendChild(div7);
+
+
+                        var div8 = document.createElement("div");
+                        div8.className = "imgBx";
+                        var img2 = document.createElement("img");
+                        img2.src = data.val().pst;
+                        img2.alt = "post-1";
+                        img2.className = "cover";
+                        div8.appendChild(img2);
+                        div1.appendChild(div8);
+
+                        var div9 = document.createElement("div");
+                        div9.className = "bottom";
+                        div1.appendChild(div9);
+
+                        // var div10 = document.createElement("div");
+                        // div10.className = "actionBtns";
+                        // div9.appendChild(div10);
+
+
+                        var fin = document.getElementById("plswork");
+                        fin.append(div1);
+
+                        // d1.insertAdjacentHTML('beforebegin', divData);
+                    
+                });
+
+
+
+
+
+            </script>
+            <!-- <script>
+                $(document).ready(function () {
+                    $('#action_menu_btn').click(function () {
+                        $('.action_menu').toggle();
+                    });
+                });
+            </script> -->
+            <!--  -->
+        </div>
+    </main>
+
+
+</body>
+
+</html>

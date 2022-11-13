@@ -1,0 +1,916 @@
+<html><head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+
+
+
+
+    <title>Chat</title>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script> -->
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            background: #000000;
+            background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+            background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+        }
+
+        .chat {
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .card {
+            height: 500px;
+            border-radius: 15px !important;
+            background-color: rgba(0, 0, 0, 0.4) !important;
+        }
+
+
+        .msg_card_body {
+            overflow-y: auto;
+        }
+
+
+        .container {
+            align-content: center;
+        }
+
+        .search {
+            border-radius: 15px 0 0 15px !important;
+            background-color: rgba(0, 0, 0, 0.3) !important;
+            border: 0 !important;
+            color: white !important;
+        }
+
+
+        .type_msg {
+            background-color: rgba(0, 0, 0, 0.3) !important;
+            border: 0 !important;
+            color: white !important;
+            height: 60px !important;
+            overflow-y: auto;
+        }
+
+        .type_msg:focus {
+            box-shadow: none !important;
+            outline: 0px !important;
+        }
+
+        .attach_btn {
+            border-radius: 15px 0 0 15px !important;
+            background-color: rgba(0, 0, 0, 0.3) !important;
+            border: 0 !important;
+            color: white !important;
+            cursor: pointer;
+        }
+
+        .send_btn {
+            border-radius: 0 15px 15px 0 !important;
+            background-color: rgba(0, 0, 0, 0.3) !important;
+            border: 0 !important;
+            color: white !important;
+            cursor: pointer;
+        }
+
+        .search_btn {
+            border-radius: 0 15px 15px 0 !important;
+            background-color: rgba(0, 0, 0, 0.3) !important;
+            border: 0 !important;
+            color: white !important;
+            cursor: pointer;
+        }
+
+        .contacts {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contacts li {
+            width: 100% !important;
+            padding: 5px 10px;
+            margin-bottom: 15px !important;
+        }
+
+        .active {
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+
+
+        .user_img_msg {
+            height: 40px;
+            width: 40px;
+            border: 1.5px solid #f5f6fa;
+
+        }
+
+        .img_cont {
+            position: relative;
+            height: 70px;
+            width: 70px;
+        }
+
+        .img_cont_msg {
+            height: 40px;
+            width: 40px;
+        }
+
+        .online_icon {
+            position: absolute;
+            height: 15px;
+            width: 15px;
+            background-color: #4cd137;
+            border-radius: 50%;
+            bottom: 0.2em;
+            right: 0.4em;
+            border: 1.5px solid white;
+        }
+
+
+
+        .user_info p {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+
+        .msg_cotainer {
+            margin-top: auto;
+            margin-bottom: auto;
+            margin-left: 10px;
+            border-radius: 25px;
+            background-color: #82ccdd;
+            padding: 10px;
+            position: relative;
+        }
+
+        .msg_cotainer_send {
+            margin-top: auto;
+            margin-bottom: auto;
+            margin-right: 10px;
+            border-radius: 25px;
+            background-color: #78e08f;
+            padding: 10px;
+            position: relative;
+        }
+
+        .msg_time {
+            position: absolute;
+            left: 0;
+            bottom: -15px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 10px;
+        }
+
+        .msg_time_send {
+            position: absolute;
+            right: 0;
+            bottom: -15px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 10px;
+        }
+
+        .msg_head {
+            position: relative;
+        }
+
+        #action_menu_btn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            color: white;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .action_menu {
+            z-index: 1;
+            position: absolute;
+            padding: 15px 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border-radius: 15px;
+            top: 30px;
+            right: 15px;
+            display: none;
+        }
+
+        .action_menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .action_menu ul li {
+            width: 100%;
+            padding: 10px 15px;
+            margin-bottom: 5px;
+        }
+
+        .action_menu ul li i {
+            padding-right: 10px;
+
+        }
+
+        .action_menu ul li:hover {
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 576px) {
+            .contacts_card {
+                margin-bottom: 15px !important;
+            }
+        }
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+    
+    body {
+    font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu,
+        Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    background: #000000;
+    }
+    
+    .navbar {
+    position: fixed;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(0, 0, 0);
+    width: 100%;
+    border: 1px solid rgb(0, 0, 0);
+    }
+    .headddd{
+        text-decoration-color: #fafafa;
+        font-size: x-large;
+    }
+    .butbut1 {
+        background-color: #000000; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 20px;
+      
+
+      }
+    .navbar .container {
+    /* background-color: #555; */
+    padding: 15px 0;
+    width: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+     margin: 0 auto; 
+    }
+    .splash{
+        position : fixed;
+        opacity:0;
+        top:0;
+        left :0;
+        width :100%;
+        height:100%;
+        background:rgb(0, 0, 0);
+        z-index:-10;
+        z-index:200;
+        color:rgb(255, 255, 255);
+        text-align:center;
+        line-height:90vh;
+        transition:all 5s;
+
+
+
+
+    }
+    @keyframes fadeIn{
+        to{
+            opacity:1;
+
+        }
+    }
+    .fade-in{
+        opacity:0;
+        animation:fadeIn 5s  ease-in forwards;
+    }
+ 
+
+    
+    .nav-links {
+    font-weight: lighter;
+    color: rgb(233, 233, 233);
+    /* background: #333 ; */
+    }
+    
+    .nav-group .nav-item {
+    list-style-type: none;
+    margin: 0 8px;
+    }
+    
+    .nav-group .nav-item a {
+    font-size: 22px;
+    display: block;
+    color: black;
+    }
+    
+    .nav-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+    
+    .action .profile {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+    
+    .action .profile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+    
+    main {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    }
+    
+    main .container {
+    position: relative;
+    margin-top: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+     background: rgb(0, 0, 0); 
+    }
+    
+    .col-9 {
+    width: 65%;
+    margin-top: 30px;
+    }
+
+    
+    .col-3 .card {
+    margin-bottom: 20px;
+    position: relative;
+    width: 100%;
+    /* min-height: 400px; */
+    display: inline-block;
+    }
+    
+    .col-3 .card .top {
+    padding: 10px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+    
+    .col-3 .card .top a {
+    color: #1d92ff;
+    }
+    
+    .col-3 .card .bottom {
+    padding: 10px 20px;
+    }
+    
+    .col-3 .card .top .userDetails {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    }
+    
+    .col-3 .card .top .userDetails h3 {
+    font-size: 16px;
+    color: #4d4d4f;
+    font-weight: 500;
+    line-height: 1em;
+    }
+    
+    .col-3 .card .top .userDetails h3 span {
+    font-size: 0.75em;
+    }
+    
+    .col-3 .card .top .userDetails h3 span {
+    font-size: 0.75em;
+    }
+    
+    .col-9 .card {
+    margin-bottom: 20px;
+    position: center;
+    width: 100%;
+    /* min-height: 400px; */
+    display: inline-block;
+    border: 1px solid rgba(7, 7, 7, 0.24);
+    }
+    
+    .col-9 .card .top {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+    
+    .col-9 .card .bottom {
+    padding: 10px 20px;
+    }
+    
+    .col-9 .card .top .userDetails {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    }
+     
+   
+     
+    .cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+    
+    .col-9 .card .top .userDetails h3 {
+    /* width: 100%; */
+    font-size: 16px;
+    color: #4d4d4f;
+    font-weight: 500;
+    line-height: 1em;
+    }
+    
+    .col-9 .card .top .userDetails h3 span {
+    font-size: 0.75em;
+    }
+    
+    .col-9 .card .top .userDetails h3 span {
+    font-size: 0.75em;
+    }
+    
+    .dot {
+    transform: scale(0.6);
+    cursor: pointer;
+    }
+    
+    .imgBx {
+    position: relative;
+    width: 100%;
+    min-height: 600px;
+    margin: 10px 0 15px;
+    }
+    
+    .actionBtns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+    
+    .actionBtns svg {
+    cursor: pointer;
+    }
+    
+    .actionBtns .left svg {
+    margin-right: 8px;
+    }
+    
+    .likes {
+    font-weight: 500;
+    margin-top: 5px;
+    font-size: 14px;
+    color: #4d4d4f;
+    }
+    
+    .message {
+    font-weight: 400;
+    margin-top: 5px;
+    font-size: 14px;
+    color: #777;
+    line-height: 1.5em;
+    }
+    
+    .message b {
+    color: #262626;
+    }
+    
+    .message span {
+    cursor: pointer;
+    color: #1d92ff;
+    }
+    
+    .comments {
+    margin-top: 10px;
+    font-weight: 400;
+    color: #999;
+    }
+    
+    .addComments {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding: 10px 0;
+    }
+    
+    .addComments a {
+    color: #1d92ffcb;
+    font-weight: 500;
+    }
+    
+    .addComments .reaction {
+    position: relative;
+    font-size: 1.3rem;
+    margin-right: 10px;
+    color: rgb(88, 88, 88);
+    }
+    
+    input.text {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-weight: 400;
+    font-size: 14px;
+    color: #262626;
+    background: none;
+    }
+    
+    input.text::placeholder {
+    color: #777;
+    }
+    
+    .postTime {
+    margin-top: 8px;
+    font-weight: lighter;
+    color: rgb(163, 163, 163);
+    font-size: 12px;
+    text-transform: uppercase;
+    }
+    
+    a {
+    text-decoration: none;
+    }
+    
+    .hidden {
+    display: none;
+    }
+    
+    @media screen and (max-width: 1000px) {
+    .col-9 {
+        width: 100%;
+        background: #fafafa;
+    }
+    
+    .col-3 {
+        display: none;
+    }
+    }
+    
+    @media screen and (max-width: 600px) {
+    .container {
+        width: 100% !important;
+    }
+    
+    .navbar .container {
+        padding: 15px 10px !important;
+    }
+    
+    .col-9 {
+        margin-top: 4px;
+        min-width: 100%;
+    }
+    
+    .statuses {
+        margin-bottom: 0px;
+    }
+    
+    .col-9 .card {
+        margin-bottom: 0px;
+        width: 100%;
+        border: none;
+    }
+    
+    .imgBx {
+        position: relative;
+        width: 100%;
+        min-height: 400px;
+        margin: 10px 0 15px;
+    }
+    
+   
+    }
+    
+    .footer .footer-section {
+    margin-left: 0.5rem;
+    color: #999999;
+    font-size: 14px;
+    font-family: sans-serif;
+    }
+    
+    .footer a:hover {
+    color: #ff0000;
+    }
+    
+    </style>
+</head>
+
+<!--Coded With Love By Mutiullah Samim-->
+
+<body>
+    <div class="container-fluid h-100">
+        <div class="row justify-content-center h-100">
+
+            <div class="col-md-8 col-xl-6 chat">
+                <div class="card">
+                                            <div class="msg_cotainer_send" id="sendDiv">
+                            SADSD                        </div>
+                        <div class="img_cont_msg">
+                        </div>
+                    <div class="card-body msg_card_body" id="bodyContent">
+
+
+                    </div>
+                    <div class="card-footer">
+                        <div class="input-group">
+                            <div class="input-group-append">
+                                <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
+                            </div>
+                            <textarea name="message" id="message" class="form-control type_msg" placeholder="Type your message..."></textarea>
+                            <div class="input-group-append">
+                                <button id="submit" class="input-group-text send_btn"><i class="fas fa-location-arrow"></i>
+                          <h1>SEND</h1>      </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Code injected by live-server -->
+    <script>
+        // <![CDATA[  <-- For SVG support
+        if ('WebSocket' in window) {
+            (function () {
+                function refreshCSS() {
+                    var sheets = [].slice.call(document.getElementsByTagName("link"));
+                    var head = document.getElementsByTagName("head")[0];
+                    for (var i = 0; i < sheets.length; ++i) {
+                        var elem = sheets[i];
+                        var parent = elem.parentElement || head;
+                        parent.removeChild(elem);
+                        var rel = elem.rel;
+                        if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+                            var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                            elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+                        }
+                        parent.appendChild(elem);
+                    }
+                }
+                var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+                var address = protocol + window.location.host + window.location.pathname + '/ws';
+                var socket = new WebSocket(address);
+                socket.onmessage = function (msg) {
+                    if (msg.data == 'reload') window.location.reload();
+                    else if (msg.data == 'refreshcss') refreshCSS();
+                };
+                if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+                    console.log('Live reload enabled.');
+                    sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+                }
+            })();
+        }
+        
+        // ]]>
+    </script>
+
+
+
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
+        import {
+            getDatabase,
+            set,
+            ref,
+            push,
+            child,
+            onValue,
+            onChildAdded
+        } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js";
+
+
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBvNa-LFl5AZ9FDDCVYqhRpG9V1N-TCP9Y",
+            authDomain: "plswork-48fd3.firebaseapp.com",
+            databaseURL: "https://plswork-48fd3-default-rtdb.firebaseio.com",
+            projectId: "plswork-48fd3",
+            storageBucket: "plswork-48fd3.appspot.com",
+            messagingSenderId: "97236397987",
+            appId: "1:97236397987:web:6dbadcedc00c53684c3416"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        var myName = prompt("Enter your name");
+
+        submit.addEventListener('click', (e) => {
+            var message = document.getElementById('message').value;
+            var name = myName;
+
+            const id = push(child(ref(database), 'messages')).key;
+
+            set(ref(database, 'messages/' + id), {
+                name: name,
+                message: message
+            });
+            document.getElementById('message').value = "";
+            
+
+        });
+
+        const newMsg = ref(database, 'messages/');
+        onChildAdded(newMsg, (data) => {
+            if (data.val().name != myName) {
+                var divData = '                        <div class="img_cont_msg">\n' +
+                   
+                    '                        </div>\n' +
+                    '                        <div class="msg_cotainer" >\n' +
+                    '                            ' + data.val().message + '' +
+                    '                            <span class="msg_time"></span>\n' +
+                    '                        </div>\n' +
+                    '                    </div>';
+                var d1 = document.getElementById('bodyContent');
+                d1.insertAdjacentHTML('beforebegin', divData);
+            } else {
+                var divData = '                        <div class="msg_cotainer_send" id="sendDiv">\n' +
+                    '                            ' + data.val().message + '' +
+                    '                        </div>\n' +
+                    '                        <div class="img_cont_msg">\n' + 
+                    '                        </div>\n' +
+                    '                    </div>';
+                var d1 = document.getElementById('bodyContent');
+                d1.insertAdjacentHTML('beforebegin', divData);
+            }
+        });
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#action_menu_btn').click(function () {
+                $('.action_menu').toggle();
+            });
+        });
+    </script><!-- Code injected by live-server -->
+    <script>
+        // <![CDATA[  <-- For SVG support
+        if ('WebSocket' in window) {
+            (function () {
+                function refreshCSS() {
+                    var sheets = [].slice.call(document.getElementsByTagName("link"));
+                    var head = document.getElementsByTagName("head")[0];
+                    for (var i = 0; i < sheets.length; ++i) {
+                        var elem = sheets[i];
+                        var parent = elem.parentElement || head;
+                        parent.removeChild(elem);
+                        var rel = elem.rel;
+                        if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+                            var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                            elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+                        }
+                        parent.appendChild(elem);
+                    }
+                }
+                var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+                var address = protocol + window.location.host + window.location.pathname + '/ws';
+                var socket = new WebSocket(address);
+                socket.onmessage = function (msg) {
+                    if (msg.data == 'reload') window.location.reload();
+                    else if (msg.data == 'refreshcss') refreshCSS();
+                };
+                if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+                    console.log('Live reload enabled.');
+                    sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+                }
+            })();
+        }
+        else {
+            console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+        }
+	// ]]>
+    </script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body></html>
