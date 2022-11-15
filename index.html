@@ -8,26 +8,8 @@
     <link rel="stylesheet" href="style.css">
     <title>blockchain project</title>
 </head>
-<script>
-    const splash = document.querySelector('.splash');
-    document.addEventListener('DDMContentLoaded', (e) => {
-        setTimeout(() => {
-            splash.classList.add('display-none');
-        }, 2000);
-    });
-</script>
-<!-- <div class="splash">
-
-        <h1 class="fade-in"> welcome to my project</h1>
-    </div> -->
 
 <body>
-
-    <!-- <div class="splash">
-
-        <h1 class="fade-in"> welcome to my project</h1>
-    </div> -->
-
     <header>
         <nav class="navbar">
             <div class="container">
@@ -42,40 +24,11 @@
                     <div class="nav-group">
                         <button onclick="document.location='chat1.html'" class="butbut1" id="chatl">CHAT</button>
 
-                        <!--                         
-                        <li class="nav-item">
-                            <a href="#">
-                                <i class="fas fa-home"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="">
-                                <i class="fab fa-facebook-messenger"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="">
-                                <i class="far fa-compass"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="">
-                                <i class="far fa-heart"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <div class="action">
-                                <div class="profile" onclick="menuToggle()">
-                                </div>
-                            </div>
-                        </li> -->
                         </ul>
                     </div>
                 </div>
         </nav>
     </header>
-
-    <!-- Code for Showing the Status -->
     <main>
         <div class="container">
             <div class="col-9" id="plswork">
@@ -85,7 +38,6 @@
 
             </div>
             <script>
-                // <![CDATA[  <-- For SVG support
                 if ('WebSocket' in window) {
                     (function () {
                         function refreshCSS() {
@@ -117,14 +69,11 @@
                     })();
                 }
 
-                // ]]>
             </script>
 
 
             <script type="module">
 
-
-                // Import the functions you need from the SDKs you need
                 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
                 import {
                     getDatabase,
@@ -136,11 +85,6 @@
                     onChildAdded
                 } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js";
 
-
-                // TODO: Add SDKs for Firebase products that you want to use
-                // https://firebase.google.com/docs/web/setup#available-libraries
-
-                // Your web app's Firebase configuration
                 const firebaseConfig = {
                     apiKey: "AIzaSyBvNa-LFl5AZ9FDDCVYqhRpG9V1N-TCP9Y",
                     authDomain: "plswork-48fd3.firebaseapp.com",
@@ -151,15 +95,12 @@
                     appId: "1:97236397987:web:6dbadcedc00c53684c3416"
                 };
 
-                // Initialize Firebase
                 const app = initializeApp(firebaseConfig);
                 const database = getDatabase(app);
                 var myName = prompt("Enter your name");
 
                 var profpic = prompt("Enter link for profile pic");
                 pstl.addEventListener('click', (e) => {
-                    // var message = document.getElementById('message').value;
-                    // var name = myName;
                     var pst1 = prompt("Enter picture link");
                     const id = push(child(ref(database), 'profpics')).key;
 
@@ -168,9 +109,6 @@
                         profpic: profpic,
                         pst: pst1
                     });
-                    ///  document.getElementById('profpics').value = "";
-
-
                 });
 
             
@@ -233,17 +171,8 @@
                         var div9 = document.createElement("div");
                         div9.className = "bottom";
                         div1.appendChild(div9);
-
-                        // var div10 = document.createElement("div");
-                        // div10.className = "actionBtns";
-                        // div9.appendChild(div10);
-
-
                         var fin = document.getElementById("plswork");
                         fin.append(div1);
-
-                        // d1.insertAdjacentHTML('beforebegin', divData);
-                    
                 });
 
 
@@ -251,14 +180,7 @@
 
 
             </script>
-            <!-- <script>
-                $(document).ready(function () {
-                    $('#action_menu_btn').click(function () {
-                        $('.action_menu').toggle();
-                    });
-                });
-            </script> -->
-            <!--  -->
+            
         </div>
     </main>
 
