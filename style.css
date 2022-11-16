@@ -348,7 +348,7 @@
     @media screen and (max-width: 1000px) {
     .col-9 {
         width: 100%;
-        background: #fafafa;
+        background: #000000;
     }
     
     .col-3 {
