@@ -192,6 +192,7 @@
     width: 100%;
     /* min-height: 400px; */
     display: inline-block;
+    background-color:#000;
     border: 1px solid rgba(7, 7, 7, 0.24);
     border-bottom: 1px solid #ddd;
     }
