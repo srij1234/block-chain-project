@@ -7,7 +7,9 @@ Using this app you can post,change profile pictures,username,chat with anyone an
 every one with the link can chat ,post on the platform.
 please follow the following steps to operate the web app:
 
-please download the zip file and extract it.
+please download the zip file and extract it 
+OR
+open this link:  https://srij1234.github.io/block-chain-project/  .
 
 open the folder and follow the steps.
 
